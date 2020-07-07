@@ -1,3 +1,5 @@
+//Essa camada controla como os gráficos serão desenhados
+
 let canvas = document.getElementById("barebones-canvas");
 let ctx2D = canvas.getContext("2d");
 
@@ -7,6 +9,10 @@ export function clearCanvas() {
 
 export function draw() {
 	for (const obj of gameObjects) {
+		if (!obj.visible) {
+			return;
+		}
+
 		if (obj.class == "RectangleSprite") {
 			drawShape.rect(obj.position, obj.extents, obj.color);
 		}

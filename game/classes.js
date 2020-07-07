@@ -1,3 +1,9 @@
+//Aqui ficam as classes e também o intermediário
+//para a comunicação entre o core e o main
+
+//Não crie classes que só servem para o seu jogo aqui
+//Ao invés disso, coloque elas no main
+
 let gameObjects = [];
 
 function Vector2(x, y) {

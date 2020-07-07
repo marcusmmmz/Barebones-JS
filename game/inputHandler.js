@@ -1,3 +1,6 @@
+//Esse é o script que gerencia os inputs
+//se precisar de mais opções de input, modifique o quanto quiser
+
 let canvas = document.getElementById("barebones-canvas");
 
 class InputMap {
@@ -37,7 +40,6 @@ document.addEventListener("keydown", (event) => {
 	for (const action in InputMap.actions) {
 		if (InputMap.actions[action].binds.includes(event.key)) {
 			InputMap.actions[action].pressed = true;
-			InputMap.actions[action].handled = false;
 		}
 	}
 });
@@ -46,6 +48,7 @@ document.addEventListener("keyup", (event) => {
 	for (const action in InputMap.actions) {
 		if (InputMap.actions[action].binds.includes(event.key)) {
 			InputMap.actions[action].pressed = false;
+			InputMap.actions[action].handled = false;
 		}
 	}
 });
@@ -75,9 +78,20 @@ class Input {
 	}
 
 	static justPressed(button) {
-		temp = !InputMap.actions[button].handled;
-		InputMap.actions[button].handled = false;
-		return temp;
+		if (InputMap.actions[button].pressed) {
+			if (!InputMap.actions[button].handled) {
+				InputMap.actions[button].handled = true;
+				return true;
+			}
+		}
+
+		return false;
+
+		/*
+		if pressed and !handled
+			handled = false
+			return true
+		*/
 	}
 
 	static get_global_mouse_position() {

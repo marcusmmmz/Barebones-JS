@@ -1,8 +1,4 @@
-/*
-let player = {
-	position: { x: 500, y: 50 },
-};
-*/
+//Aqui é onde a lógica do jogo em si vai
 
 let player = new Node2D();
 player.addChild(new RectangleSprite());
@@ -25,5 +21,3 @@ player._frame = function (delta) {
 		player.global_position.x += 2;
 	}
 };
-
-//graphics.draw.rect(player.position, { x: 10, y: 10 }, "#000000");
