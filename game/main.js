@@ -59,7 +59,7 @@ function addCube() {
 }
 
 //Gera vários cubos
-for (i = 0; i <= 4; i++) {
+for (i = 0; i < 100; i++) {
 	addCube();
 }
 
