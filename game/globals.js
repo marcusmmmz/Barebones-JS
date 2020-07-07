@@ -4,11 +4,15 @@
 //Não crie classes que só servem para o seu jogo aqui
 //Ao invés disso, coloque elas no main
 
+let globals = {
+	canvasBG: "#ffffff",
+};
+
 let gameObjects = [];
 
 function Vector2(x, y) {
-	x = x | 0;
-	y = y | 0;
+	x = x || 0;
+	y = y || 0;
 	return { x, y };
 }
 
@@ -26,6 +30,16 @@ class BlankNode {
 
 		this.class = this.constructor.name;
 
+		this.inheritsClass = function (what) {
+			let currentClass = this.__proto__;
+
+			while (currentClass.constructor.name != what) {
+				currentClass = currentClass.__proto__;
+			}
+
+			return currentClass.constructor.name == what;
+		};
+
 		this.draw = function () {
 			this.drawChildren();
 		};
@@ -39,48 +53,37 @@ class BlankNode {
 }
 
 class Node2D extends BlankNode {
-	set global_position(value) {
-		this._global_position = value;
+	set globalPos(value) {
+		this._globalPos = value;
 	}
 
-	get global_position() {
-		return this._global_position;
+	get globalPos() {
+		return this._globalPos;
 	}
 
-	set relative_position(value) {
-		this._position = value;
+	set relativePos(value) {
+		console.log("Change globalPos instead");
 	}
 
-	get relative_position() {
+	get relativePos() {
 		let vec;
 		if (this.parent) {
 			vec = Vector2(
-				this.global_position.x + this.parent.global_position.x,
-				this.global_position.y + this.parent.global_position.y
+				this.globalPos.x + this.parent.globalPos.x,
+				this.globalPos.y + this.parent.globalPos.y
 			);
 		} else {
-			vec = this.global_position;
+			vec = this.globalPos;
 		}
 
 		return vec;
-	}
-
-	set position(value) {
-		console.log("Pls don't change position value");
-	}
-
-	get position() {
-		return Vector2(
-			this.global_position.x + this.relative_position.x,
-			this.global_position.y + this.relative_position.y
-		);
 	}
 
 	constructor() {
 		super();
 
 		this.visible = true;
-		this._global_position = Vector2(0, 0);
+		this._globalPos = Vector2(0, 0);
 	}
 }
 
