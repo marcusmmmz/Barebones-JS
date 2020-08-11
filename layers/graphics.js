@@ -1,28 +1,30 @@
 //Essa camada controla como os gráficos serão desenhados
 
-let canvas = document.getElementById("barebones-canvas");
-let ctx2D = canvas.getContext("2d");
+//let canvas = document.getElementById("barebones-canvas");
+class graphicsEngine2D {
+	static ctx2D = canvas.getContext("2d");
 
-export function clearCanvas() {
-	ctx2D.fillStyle = globals.canvasBG;
-	ctx2D.fillRect(0, 0, canvas.width, canvas.height);
-}
+	static canvasBG = "rgb(64, 64, 64)";
 
-export function draw() {
-	for (const obj of gameObjects) {
-		if (!obj.visible) {
-			return;
-		}
+	static clearCanvas() {
+		this.ctx2D.fillStyle = this.canvasBG;
+		this.ctx2D.fillRect(0, 0, canvas.width, canvas.height);
+	}
 
-		if (obj.inheritsClass("RectangleSprite")) {
-			drawShape.rect(obj.relativePos, obj.extents, obj.color);
+	static drawAll() {
+		for (const obj of nodeHandler.gameObjects) {
+			if (!obj.visible) {
+				return;
+			}
+
+			if (obj.inheritsClass("RectangleSprite")) {
+				this.drawShapeRect(obj.relativePos, obj.extents, obj.color);
+			}
 		}
 	}
-}
 
-export class drawShape {
-	static rect(pos, size, color) {
-		ctx2D.fillStyle = color || "#000000";
-		ctx2D.fillRect(pos.x, pos.y, size.x, size.y);
+	static drawShapeRect(pos, size, color) {
+		this.ctx2D.fillStyle = color || "#000000";
+		this.ctx2D.fillRect(pos.x, pos.y, size.x, size.y);
 	}
 }

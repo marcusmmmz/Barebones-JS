@@ -1,8 +1,6 @@
 //Esse é o script que gerencia os inputs
 //se precisar de mais opções de input, modifique o quanto quiser
 
-let canvas = document.getElementById("barebones-canvas");
-
 class InputMap {
 	static actions = {
 		Up: {

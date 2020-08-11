@@ -1,17 +1,14 @@
 //Esse é o core, ele gerencia todas as layers
 
-import * as graphics from "./layers/graphics.js";
-import * as nodeHandler from "./layers/nodeHandler.js";
-
 class core {
 	static _frame() {
-		graphics.clearCanvas();
+		graphicsEngine2D.clearCanvas();
 
 		//Gerencia os nodes
-		nodeHandler.handle();
+		nodeHandler.handleAll();
 
-		//Desenha todos os Nodes do canvas
-		graphics.draw();
+		//Desenha todos os nodes do canvas
+		graphicsEngine2D.drawAll();
 	}
 }
 

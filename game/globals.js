@@ -1,14 +1,9 @@
-//Aqui ficam as classes e também o intermediário
-//para a comunicação entre o core e o main
+//Aqui ficam as classes da engine
 
 //Não crie classes que só servem para o seu jogo aqui
 //Ao invés disso, coloque elas no main
 
-let globals = {
-	canvasBG: "#ffffff",
-};
-
-let gameObjects = [];
+let canvas = document.getElementById("barebones-canvas");
 
 function Vector2(x, y) {
 	x = x || 0;
@@ -18,12 +13,13 @@ function Vector2(x, y) {
 
 class BlankNode {
 	constructor() {
-		gameObjects.push(this);
+		nodeHandler.registerNode(this);
 
 		this.parent = null;
 		this.children = [];
 
 		this.addChild = function (child) {
+			delete child.parent.children[child];
 			this.children.push(child);
 			child.parent = this;
 		};
