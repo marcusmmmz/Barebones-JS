@@ -9,7 +9,7 @@ export function step() {
 
     for (let i of gameObjects) {
         i.draw()
-        i.update()
+        if (i.update) i.update()
     }
 	requestAnimationFrame(step)
 }
