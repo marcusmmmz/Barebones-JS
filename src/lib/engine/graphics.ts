@@ -13,8 +13,8 @@ canvasStore.subscribe((value) => {
 	ctx = canvas.getContext("2d");
 });
 
-export function clearCanvas(color?: string) {
-	ctx.fillStyle = color ?? "black";
+export function clearCanvas(color: string = "black") {
+	ctx.fillStyle = color;
 	ctx.fillRect(0, 0, canvas.width ?? 0, canvas.height ?? 0);
 }
 

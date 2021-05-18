@@ -4,6 +4,7 @@
 	import { fruits, score, level } from "./stores";
 	import { Vec2 } from "$lib/engine/utils";
 	import Canvas from "$lib/Canvas.svelte";
+	import Layer from "$lib/Layer.svelte";
 	import Text from "$lib/Text.svelte";
 	import Player from "./Player.svelte";
 	import Enemy from "./Enemy.svelte";
@@ -18,19 +19,20 @@
 		$level++;
 		fruits.spawn(4 + $level);
 	}
-
-	let playerPos = Vec2(200, 200);
-	let enemyPos = Vec2(100, 100);
 </script>
 
 <Canvas size={Vec2(500, 500)}>
-	<Player bind:pos={playerPos} />
-	<Enemy bind:pos={enemyPos} />
-	{#each $fruits as fruit}
-		<Fruit pos={fruit} />
-	{/each}
-	<Text pos={Vec2(50, 50)} text="Score: {$score}" />
-	<Text pos={Vec2(50, 70)} text="Level: {$level}" />
+	<Layer name="game">
+		<Player />
+		<Enemy />
+		{#each $fruits as fruit}
+			<Fruit pos={fruit} />
+		{/each}
+	</Layer>
+	<Layer name="ui">
+		<Text pos={Vec2(50, 50)} text="Score: {$score}" />
+		<Text pos={Vec2(50, 70)} text="Level: {$level}" />
+	</Layer>
 </Canvas>
 
 <style>

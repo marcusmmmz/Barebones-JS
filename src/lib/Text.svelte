@@ -1,8 +1,3 @@
-<script lang="ts" context="module">
-	export const prerender = false;
-	export const ssr = false;
-</script>
-
 <script lang="ts">
 	import { Vec2 } from "$lib/engine/utils";
 	import { ctx } from "$lib/engine/graphics";

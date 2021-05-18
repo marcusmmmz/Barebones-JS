@@ -1,30 +1,27 @@
-import { clearCanvas } from "./graphics";
-import { onMount } from "svelte";
+import { getContext, onMount } from "svelte";
 
-export let updateCallbacks: ((delta: number) => any)[] = [];
+export function createLoop(fn: (delta: number) => any) {
+	let frame: number;
+	let lastTime = performance.now();
 
-// Mainloop
-let lastRender = 0;
-export function step(timestamp: number) {
-	let delta = timestamp - lastRender;
-
-	clearCanvas("#333333");
-
-	for (let callback of updateCallbacks) {
-		callback(delta);
+	function loop() {
+		frame = requestAnimationFrame(loop);
+		const beginTime = performance.now();
+		const delta = (beginTime - lastTime) / 1000;
+		lastTime = beginTime;
+		fn(delta);
 	}
-	lastRender = timestamp;
 
-	requestAnimationFrame(step);
+	loop();
+
+	return () => cancelAnimationFrame(frame);
 }
 
 export function onUpdate(callback) {
+	const { add, remove } = getContext("canvasLayer") ?? getContext("canvas");
+
 	onMount(() => {
-		updateCallbacks.push(callback);
-		return () => {
-			updateCallbacks = updateCallbacks.filter((v) => v != callback);
-		};
+		add(callback);
+		return () => remove(callback);
 	});
 }
-
-requestAnimationFrame(step);
