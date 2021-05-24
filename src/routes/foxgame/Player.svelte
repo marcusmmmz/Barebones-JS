@@ -13,30 +13,20 @@
 	const size = 30;
 
 	onUpdate(() => {
-		function isInsideCanvas(pos: Vec2) {
-			const clamped = Vec2(
-				clamp(pos.x, size / 2, canvas.width - size / 2),
-				clamp(pos.y, size / 2, canvas.height - size / 2)
-			);
-			return clamped.x == pos.x && clamped.y == pos.y;
-		}
+		pos.y +=
+			(Number(Input.pressed("down")) - Number(Input.pressed("up"))) * speed;
 
-		let tempPos = pos.mulByNum(1);
-		if (Input.pressed("up")) tempPos.y -= speed;
-		if (Input.pressed("down")) tempPos.y += speed;
-		if (Input.pressed("left")) tempPos.x -= speed;
-		if (Input.pressed("right")) tempPos.x += speed;
+		pos.x +=
+			(Number(Input.pressed("right")) - Number(Input.pressed("left"))) * speed;
 
-		if (isInsideCanvas(tempPos)) {
-			pos.x = tempPos.x;
-			pos.y = tempPos.y;
-		}
+		pos.x = clamp(pos.x, size / 2, 500 - size / 2);
+		pos.y = clamp(pos.y, size / 2, 500 - size / 2);
 
 		draw.image(sprite, pos.rounded(), num2vec(size));
 	});
 
 	$: for (let fruit of $fruits) {
-		if (radialDistance(pos, fruit) <= 30) {
+		if (radialDistance(pos, fruit) <= size) {
 			fruits.remove(fruit);
 			$score++;
 		}

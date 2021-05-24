@@ -13,20 +13,20 @@
 
 	let closestFruit = Vec2();
 
-	$: {
-		$fruits.forEach((fruit) => {
-			closestFruit = $fruits[0];
-			if (
-				radialDistance(pos, closestFruit) > radialDistance(fruit, closestFruit)
-			) {
+	$: searchClosestFruit(), $fruits;
+
+	function searchClosestFruit() {
+		closestFruit = $fruits[0];
+		for (const fruit of $fruits) {
+			if (radialDistance(pos, closestFruit) > radialDistance(pos, fruit)) {
 				closestFruit = fruit;
 			}
-		});
+		}
 	}
 
 	onUpdate(() => {
 		for (const fruit of $fruits) {
-			if (radialDistance(pos, fruit) <= 30) {
+			if (radialDistance(pos, fruit) <= size) {
 				fruits.remove(fruit);
 				$score--;
 			}

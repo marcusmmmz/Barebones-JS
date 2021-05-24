@@ -44,6 +44,10 @@ export class Vector2 {
 		return Vec2(Math.round(this.x), Math.round(this.y));
 	}
 
+	clone() {
+		return Vec2(this.x, this.y)
+	}
+
 	toString() {
 		return `(${this.x},${this.y})`;
 	}
