@@ -1,19 +1,21 @@
 {
-  "name": "vite",
-  "version": "0.0.0",
+  "name": "~TODO~",
+  "version": "0.0.1",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "serve": "vite preview"
+    "dev": "svelte-kit dev",
+    "build": "svelte-kit build",
+    "preview": "svelte-kit preview",
+    "check": "svelte-check --tsconfig ./tsconfig.json",
+    "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch"
   },
   "devDependencies": {
-    "@sveltejs/vite-plugin-svelte": "^1.0.0-next.7",
-    "svelte": "^3.37.0",
-    "svelte-preprocess": "^4.7.2",
-    "typescript": "^4.2.4",
-    "vite": "^2.3.3"
+    "@sveltejs/adapter-netlify": "^1.0.0-next.17",
+    "@sveltejs/kit": "next",
+    "svelte": "^3.34.0",
+    "svelte-check": "^2.0.0",
+    "svelte-preprocess": "^4.0.0",
+    "tslib": "^2.0.0",
+    "typescript": "^4.0.0"
   },
-  "dependencies": {
-    "svelte-routing": "^1.6.0"
-  }
+  "type": "module"
 }

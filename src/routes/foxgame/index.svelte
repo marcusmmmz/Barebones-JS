@@ -9,6 +9,7 @@
 	import Player from "./Player.svelte";
 	import Enemy from "./Enemy.svelte";
 	import Fruit from "./Fruit.svelte";
+	import { clearCanvas } from "$lib/engine/graphics";
 
 	InputMap.addAction("up", ["ArrowUp", "w"]);
 	InputMap.addAction("left", ["ArrowLeft", "a"]);
@@ -44,7 +45,8 @@
 		height: 100vh;
 	}
 
-	:global(html, body) {
+	:global(html),
+	:global(body) {
 		background: rgb(29, 29, 29);
 		color: white;
 		margin: 0;

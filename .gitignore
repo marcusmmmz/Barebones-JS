@@ -1,7 +1,4 @@
-/node_modules/
-/dist/
-/.vscode/
 .DS_Store
-
-# Local Netlify folder
-.netlify
+node_modules
+/.svelte-kit
+/package

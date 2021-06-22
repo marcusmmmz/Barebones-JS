@@ -1,8 +1,4 @@
-<script>
-	import { Link } from "svelte-routing";
-</script>
-
 <div>
-	<p><Link to="foxgame">Du bist eine fuchs !</Link></p>
-	<p><Link to="langton">Langton's ant !</Link></p>
+	<p><a href="foxgame">Du bist eine fuchs !</a></p>
+	<p><a href="langton">Langton's ant !</a></p>
 </div>

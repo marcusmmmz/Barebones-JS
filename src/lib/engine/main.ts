@@ -17,7 +17,7 @@ export function createLoop(fn: (delta: number) => any) {
 	return () => cancelAnimationFrame(frame);
 }
 
-export function onUpdate(callback) {
+export function onUpdate(callback: (delta: number) => any) {
 	const { add, remove } = getContext("canvasLayer") ?? getContext("canvas");
 
 	onMount(() => {

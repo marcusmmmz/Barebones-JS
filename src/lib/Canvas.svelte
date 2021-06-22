@@ -4,7 +4,13 @@
 	import { onDestroy, setContext } from "svelte";
 	import { createLoop } from "$lib/engine/main";
 
+	export let style = "";
+
 	export let size = Vec2(500, 500);
+
+	export let mainloop = (delta: number) => {
+		clearCanvas("#333333");
+	};
 
 	let listeners = [];
 
@@ -19,7 +25,7 @@
 	});
 
 	const stopLoop = createLoop((delta: number) => {
-		clearCanvas("#333333");
+		mainloop(delta);
 		for (const fn of listeners) {
 			fn(delta);
 		}
@@ -28,7 +34,7 @@
 	onDestroy(stopLoop);
 </script>
 
-<canvas bind:this={$canvasStore} width={size.x} height={size.y}>
+<canvas {style} bind:this={$canvasStore} width={size.x} height={size.y}>
 	<slot />
 </canvas>
 

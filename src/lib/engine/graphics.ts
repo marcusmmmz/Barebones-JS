@@ -1,16 +1,18 @@
+import { browser } from "$app/env";
 import { writable } from "svelte/store";
 import type { Vec2 } from "./utils";
 
-export let canvasStore = writable<HTMLCanvasElement>(
-	document.createElement("canvas")
-);
+export let canvasStore = writable<HTMLCanvasElement>();
+if (browser) {
+	canvasStore.set(document?.createElement("canvas"));
+}
 
 export let canvas: HTMLCanvasElement;
 export let ctx: CanvasRenderingContext2D;
 
 canvasStore.subscribe((value) => {
-	canvas = value ?? document.createElement("canvas");
-	ctx = canvas.getContext("2d");
+	canvas = value;
+	ctx = canvas?.getContext("2d");
 });
 
 export function clearCanvas(color: string = "black") {
