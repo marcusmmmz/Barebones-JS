@@ -1,4 +1,4 @@
-import { canvasStore } from "$lib/engine/graphics";
+import { browser } from "$app/env";
 
 export class InputMap {
 	static actions: {
@@ -26,16 +26,15 @@ export class Input {
 		}
 	}
 }
-canvasStore.subscribe((canvas) => {
-	if (!canvas) return;
-	canvas.addEventListener("keydown", (event) => {
+if (browser) {
+	document.addEventListener("keydown", (event) => {
 		for (const action in InputMap.actions) {
 			if (InputMap.actions[action].binds.includes(event.key)) {
 				InputMap.actions[action].pressed = true;
 			}
 		}
 	});
-	canvas.addEventListener("keyup", (event) => {
+	document.addEventListener("keyup", (event) => {
 		for (const action in InputMap.actions) {
 			if (InputMap.actions[action].binds.includes(event.key)) {
 				InputMap.actions[action].pressed = false;
@@ -43,4 +42,4 @@ canvasStore.subscribe((canvas) => {
 			}
 		}
 	});
-});
+}
